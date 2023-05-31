@@ -1,13 +1,121 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  height: 100vh;
+  font-size: 16px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: #333;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
+}
+
+.fork-ribbon {
+  width: 12.5em;
+  height: 12.5em;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+  font-size: 1em;
+  text-decoration: none;
+  text-indent: -9999999999px;
+}
+
+.fork-ribbon.fixed {
+  position: fixed;
+}
+
+.fork-ribbon:hover,
+.fork-ribbon:active {
+  background-color: rgba(0, 0, 0, 0.0);
+}
+
+.fork-ribbon::before,
+.fork-ribbon::after {
+  position: absolute;
+  display: block;
+  width: 15.5em;
+  height: 1.6em;
+  top: 3.5em;
+  right: -3.5em;
+  box-sizing: content-box;
+  transform: rotate(45deg);
+}
+
+.fork-ribbon::before {
+  content: "";
+  padding: .4em 0;
+  background-color: rgb(171, 2, 2);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  box-shadow: 0 .15em .25em rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+}
+
+.fork-ribbon::after {
+  content: attr(data-ribbon);
+  color: #fff;
+  font: 700 1em sans-serif;
+  line-height: 1.6em;
+  text-decoration: none;
+  text-shadow: 0 -0.08em rgba(0, 0, 0, 0.5);
+  text-align: center;
+  text-indent: 0;
+  padding: 0.15em 0;
+  margin: 0.15em 0;
+  border-width: 0.08em 0;
+  border-style: dotted;
+  border-color: #fff;
+  border-color: rgba(255, 255, 255, .7);
+}
+
+.fork-ribbon.left-top,
+.fork-ribbon.left-bottom {
+  right: auto;
+  left: 0;
+}
+
+.fork-ribbon.left-bottom,
+.fork-ribbon.right-bottom {
+  top: auto;
+  bottom: 0;
+}
+
+.fork-ribbon.left-top::before,
+.fork-ribbon.left-top::after,
+.fork-ribbon.left-bottom::before,
+.fork-ribbon.left-bottom::after {
+  right: auto;
+  left: -3.2em;
+}
+
+.fork-ribbon.left-bottom::before,
+.fork-ribbon.left-bottom::after,
+.fork-ribbon.right-bottom::before,
+.fork-ribbon.right-bottom::after {
+  top: auto;
+  left: -3.2em;
+}
+
+.fork-ribbon.left-top::before,
+.fork-ribbon.left-top::after,
+.fork-ribbon.left-bottom::before,
+.fork-ribbon.left-bottom::after {
+  transform: rotate(-45deg);
+}
+
+body .fork-ribbon:before {
+  background: #333;
+}
+
+@media screen and (max-width:540px) {
+  .fork-ribbon {
+    display: none;
+  }
 }

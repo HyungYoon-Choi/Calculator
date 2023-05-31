@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Wrapper from './component/Wrapper';
+import Screen from './component/Screen';
+import ButtonBox from './component/ButtonBox';
+import Button from './component/Button';
 
-function App() {
+const btnValuees = [
+  ["C", "+-", "%", "/"],
+  [7, 8, 9, 'X'],
+  [4, 5, 6, '-'],
+  [1, 2, 3, '+'],
+  [0, '.', '=']
+];
+
+const App = () => {
+
+  const buttonClick = (e, btn) => {
+    // btn 조건에 따른 정보 출력
+    console.log(btn);
+    console.log(e);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <Screen value="01011" />
+      <ButtonBox>
+        {btnValuees.flat().map((btn, i) => (
+          <Button key={i} className={btn === "=" ? "equals" : ""} value={btn} onClick={(e) => buttonClick(e, btn)} />
+        ))}
+      </ButtonBox>
+    </Wrapper>
   );
-}
+};
 
 export default App;
