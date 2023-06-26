@@ -24,8 +24,9 @@ const btnValuees = [
 
 const toLocaleString = (num) => String(num).replace(
   /(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g,
-  "$1 "
+  "$1,"
 );
+
 const removeSpaces = (num) => num
   .toString()
   .replace(/\s/g, "");
@@ -50,7 +51,7 @@ const App = () => {
         num: removeSpaces(calc.num) % 1 === 0 && !calc
           .num
           .toString()
-          .includes(".")
+          .includes(",")
           ? toLocaleString(Number(removeSpaces(calc.num + value)))
           : toLocaleString(calc.num + value),
         res: !calc.sign
@@ -68,12 +69,31 @@ const App = () => {
       res: 0
     })
   }
-  const inverClick = () => { }
-  const percentClick = () => { }
+
+  const inverClick = () => {
+    if (calc.num) {
+      let newNum = Number(removeSpaces(calc.num)) * -1;
+      setCalc({
+        ...calc,
+        num: toLocaleString(newNum)
+      });
+    }
+  };
+
+  const percentClick = () => {
+    if (calc.num) {
+      let newNum = Number(removeSpaces(calc.num)) / 100;
+      setCalc({
+        ...calc,
+        num: toLocaleString(newNum)
+      });
+    }
+  };
+
   const signClick = (e) => {
     setCalc({
       ...calc,
-      sigh: e.target.innerHTML,
+      sign: e.target.innerHTML,
       num: 0,
       res: !calc.num
         ? calc.res
@@ -84,8 +104,34 @@ const App = () => {
           )
     })
   }
-  const equalsClick = () => { }
-  const comaClick = () => { }
+
+  const equalsClick = () => {
+    if (calc.sign && calc.num) {
+      let newResult = math(
+        Number(removeSpaces(calc.res)),
+        Number(removeSpaces(calc.num)),
+        calc.sign
+      );
+
+      setCalc({
+        ...calc,
+        res: toLocaleString(newResult),
+        num: 0,
+        sign: ''
+      });
+    }
+  };
+
+  const comaClick = () => {
+    if (!calc.num.includes(".")) {
+      setCalc({
+        ...calc,
+        num: calc.num + ".",
+        res: !calc.sign ? 0 : calc.res
+      });
+    }
+  };
+
   const buttonClick = (e, btn) => {
 
     btn === "C"
@@ -95,7 +141,7 @@ const App = () => {
         : btn === "%"
           ? percentClick()
           : btn === "/" || btn === "X" || btn === "-" || btn === "+"
-            ? signClick()
+            ? signClick(e)
             : btn === "="
               ? equalsClick()
               : btn === "."
