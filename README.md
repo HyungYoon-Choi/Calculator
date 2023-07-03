@@ -1,70 +1,20 @@
-# Getting Started with Create React App
+# React 계산기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이것은 React를 사용하여 만든 간단한 계산기 애플리케이션입니다.
 
-## Available Scripts
+## 프로젝트 개요
 
-In the project directory, you can run:
+이 계산기는 덧셈, 뺄셈, 곱셈, 나눗셈과 같은 기본 산술 연산을 수행할 수 있습니다. 또한 퍼센트 계산, 부호 반전 및 숫자 포맷팅과 같은 기능도 포함되어 있습니다.
 
-### `npm start`
+## 기술 개요
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+이 애플리케이션은 React의 함수형 컴포넌트와 상태 관리를 위한 훅을 사용합니다. 명확하고 간단한 구조를 따르므로 이해하고 수정하기 쉽습니다. 사용된 컴포넌트는 다음과 같습니다:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- `Wrapper`: 계산기 전체를 감싸는 간단한 스타일 컴포넌트입니다.
+- `Screen`: 현재 숫자 또는 연산 결과를 표시하는 컴포넌트입니다.
+- `ButtonBox`: 모든 버튼 컴포넌트를 보유하는 컴포넌트입니다.
+- `Button`: 간단한 버튼 컴포넌트입니다.
 
-### `npm test`
+계산기의 상태는 `useState` 훅을 사용하여 관리됩니다. 상태에는 현재 숫자, 연산 결과, 수행할 연산의 기호가 포함됩니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+각 유형의 버튼 클릭, 즉 숫자 클릭, 연산 클릭, 특별 기능 클릭(퍼센트 및 부호 반전 등)에 대한 이벤트 핸들러가 정의되어 있습니다.
