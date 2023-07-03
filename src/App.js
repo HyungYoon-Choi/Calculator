@@ -22,21 +22,28 @@ const btnValuees = [
   ]
 ];
 
-const toLocaleString = (num) => String(num).replace(
-  /(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g,
-  "$1,"
-);
+const toLocaleString = (num) => num.toLocaleString('en-US');
+
+const removeCommas = (strNum) => strNum.replace(/,/g, "");
 
 const removeSpaces = (num) => num
   .toString()
   .replace(/\s/g, "");
-const math = (a, b, sign) => sign === "+"
-  ? a + b
-  : sign === "-"
-    ? a - b
-    : sign === "X"
-      ? a * b
-      : a / b;
+
+const math = (a, b, sign) => {
+  a = Number(removeCommas(a.toString()));
+  b = Number(removeCommas(b.toString()));
+
+  let result = sign === "+"
+    ? a + b
+    : sign === "-"
+      ? a - b
+      : sign === "X"
+        ? a * b
+        : a / b;
+
+  return toLocaleString(result);
+};
 
 const App = () => {
 
@@ -45,21 +52,19 @@ const App = () => {
   const numClick = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
-    if (removeSpaces(calc.num).length < 16) {
+
+    if (removeCommas(calc.num.toString()).length < 16) {
+      const newNum = calc.num + value;
+
       setCalc({
         ...calc,
-        num: removeSpaces(calc.num) % 1 === 0 && !calc
-          .num
-          .toString()
-          .includes(",")
-          ? toLocaleString(Number(removeSpaces(calc.num + value)))
-          : toLocaleString(calc.num + value),
+        num: toLocaleString(Number(removeCommas(newNum))),
         res: !calc.sign
           ? 0
           : calc.res
-      })
+      });
     }
-  }
+  };
 
   const resetClick = () => {
     setCalc({
@@ -108,14 +113,14 @@ const App = () => {
   const equalsClick = () => {
     if (calc.sign && calc.num) {
       let newResult = math(
-        Number(removeSpaces(calc.res)),
-        Number(removeSpaces(calc.num)),
+        removeCommas(calc.res.toString()),
+        removeCommas(calc.num.toString()),
         calc.sign
       );
 
       setCalc({
         ...calc,
-        res: toLocaleString(newResult),
+        res: newResult,
         num: 0,
         sign: ''
       });
